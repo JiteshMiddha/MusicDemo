@@ -86,28 +86,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         songs = loadSongs()
+        tableView.tableFooterView = UIView()
         tableView.reloadData()
         
         UIApplication.shared.beginReceivingRemoteControlEvents()
-        
-        
         
         commandCenter.previousTrackCommand.isEnabled = (self.currentSongIndex != 0)
         commandCenter.nextTrackCommand.isEnabled = (self.currentSongIndex != self.songs.count - 1)
         
         commandCenter.pauseCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
-            //Update your button here for the pause command
-            self.pauseAudio()
             
+            self.pauseAudio()
             return .success
         }
         
         commandCenter.playCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
-            //Update your button here for the play command
+            
             self.playAudio()
-
             return .success
         }
         
